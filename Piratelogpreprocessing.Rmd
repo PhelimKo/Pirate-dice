@@ -1,0 +1,333 @@
+---
+title: "Piratelogpreprocessing"
+author: "Phelim"
+date: "2026-07-04"
+output: html_document
+---
+
+1. Packages
+```{r}
+library(tidyr)
+library(dplyr)
+library(tidyverse)
+library(openxlsx)
+
+```
+
+2. Import data
+```{r}
+pl1 <- read.csv("C:/Users/korvi/OneDrive/Desktop/aicross/piratelogs/001_Pirate_Log.csv")
+pl3 <- read.csv("C:/Users/korvi/OneDrive/Desktop/aicross/piratelogs/003_Pirate_Log.csv")
+pl4 <- read.csv("C:/Users/korvi/OneDrive/Desktop/aicross/piratelogs/004_Pirate_Log.csv")
+pl5 <- read.csv("C:/Users/korvi/OneDrive/Desktop/aicross/piratelogs/005_Pirate_Log.csv")
+pl6 <- read.csv("C:/Users/korvi/OneDrive/Desktop/aicross/piratelogs/006_Pirate_Log.csv")
+pl7 <- read.csv("C:/Users/korvi/OneDrive/Desktop/aicross/piratelogs/007_Pirate_Log.csv")
+pl8 <- read.csv("C:/Users/korvi/OneDrive/Desktop/aicross/piratelogs/008_Pirate_Log.csv")
+pl10 <- read.csv("C:/Users/korvi/OneDrive/Desktop/aicross/piratelogs/010_Pirate_Log.csv")
+pl11 <- read.csv("C:/Users/korvi/OneDrive/Desktop/aicross/piratelogs/011_Pirate_Log.csv")
+pl13 <- read.csv("C:/Users/korvi/OneDrive/Desktop/aicross/piratelogs/013_Pirate_Log.csv")
+pl14 <- read.csv("C:/Users/korvi/OneDrive/Desktop/aicross/piratelogs/014_Pirate_Log.csv")
+pl15 <- read.csv("C:/Users/korvi/OneDrive/Desktop/aicross/piratelogs/015_Pirate_Log.csv")
+```
+
+3. Deviding the df's by participant
+```{r}
+pl1_p1 <- pl1[seq(1, nrow(pl1), by = 2), ]
+pl1_p2 <- pl1[seq(2, nrow(pl1), by = 2), ]
+pl3_p1 <- pl3[seq(1, nrow(pl3), by = 2), ]
+pl3_p2 <- pl3[seq(2, nrow(pl3), by = 2), ]
+pl4_p1 <- pl4[seq(1, nrow(pl4), by = 2), ]
+pl4_p2 <- pl4[seq(2, nrow(pl4), by = 2), ]
+pl5_p1 <- pl5[seq(1, nrow(pl5), by = 2), ]
+pl5_p2 <- pl5[seq(2, nrow(pl5), by = 2), ]
+pl6_p1 <- pl6[seq(1, nrow(pl6), by = 2), ]
+pl6_p2 <- pl6[seq(2, nrow(pl6), by = 2), ]
+pl7_p1 <- pl7[seq(1, nrow(pl7), by = 2), ]
+pl7_p2 <- pl7[seq(2, nrow(pl7), by = 2), ]
+pl8_p1 <- pl8[seq(1, nrow(pl8), by = 2), ]
+pl8_p2 <- pl8[seq(2, nrow(pl8), by = 2), ]
+pl10_p1 <- pl10[seq(1, nrow(pl10), by = 2), ]
+pl10_p2 <- pl10[seq(2, nrow(pl10), by = 2), ]
+pl11_p1 <- pl11[seq(1, nrow(pl11), by = 2), ]
+pl11_p2 <- pl11[seq(2, nrow(pl11), by = 2), ]
+pl13_p1 <- pl13[seq(1, nrow(pl13), by = 2), ]
+pl13_p2 <- pl13[seq(2, nrow(pl13), by = 2), ]
+pl14_p1 <- pl14[seq(1, nrow(pl14), by = 2), ]
+pl14_p2 <- pl14[seq(2, nrow(pl14), by = 2), ]
+pl15_p1 <- pl15[seq(1, nrow(pl15), by = 2), ]
+pl15_p2 <- pl15[seq(2, nrow(pl15), by = 2), ]
+```
+
+
+4. Into wide format
+```{r}
+# Log 1
+wpl1_p1 <- pl1_p1 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+wpl1_p2 <- pl1_p2 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+# Log 3
+wpl3_p1 <- pl3_p1 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+wpl3_p2 <- pl3_p2 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+# Log 4
+wpl4_p1 <- pl4_p1 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+wpl4_p2 <- pl4_p2 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+# Log 5
+wpl5_p1 <- pl5_p1 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+wpl5_p2 <- pl5_p2 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+# Log 6
+wpl6_p1 <- pl6_p1 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+wpl6_p2 <- pl6_p2 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+# Log 7
+wpl7_p1 <- pl7_p1 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+wpl7_p2 <- pl7_p2 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+# Log 8
+wpl8_p1 <- pl8_p1 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+wpl8_p2 <- pl8_p2 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+# Log 10
+wpl10_p1 <- pl10_p1 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+wpl10_p2 <- pl10_p2 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+# Log 11
+wpl11_p1 <- pl11_p1 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+wpl11_p2 <- pl11_p2 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+# Log 13
+wpl13_p1 <- pl13_p1 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+wpl13_p2 <- pl13_p2 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+# Log 14
+wpl14_p1 <- pl14_p1 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+wpl14_p2 <- pl14_p2 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+# Log 15
+wpl15_p1 <- pl15_p1 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+wpl15_p2 <- pl15_p2 %>%
+  group_by(participant) %>%
+  mutate(trial_seq = row_number()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = "participant",  
+              names_from = trial_seq,
+              values_from = choice)
+
+```
+
+
+5. Creating missing data
+```{r}
+
+# Log 2
+
+wpl2_p1 <- wpl1_p1 |>
+  mutate(across(last_col(14):last_col(0), ~NA_character_))
+
+wpl2_p2 <- wpl1_p2 |>
+  mutate(across(last_col(14):last_col(0), ~NA_character_))
+
+# Log 9
+
+wpl9_p1 <- wpl1_p1 |>
+  mutate(across(last_col(14):last_col(0), ~NA_character_))
+
+wpl9_p2 <- wpl1_p2 |>
+  mutate(across(last_col(14):last_col(0), ~NA_character_))
+
+# Log 12
+
+wpl12_p1 <- wpl1_p1 |>
+  mutate(across(last_col(14):last_col(0), ~NA_character_))
+
+wpl12_p2 <- wpl1_p2 |>
+  mutate(across(last_col(14):last_col(0), ~NA_character_))
+
+```
+
+
+6. Merging dataframes 
+```{r}
+
+pl <- rbind(wpl1_p1, wpl1_p2, wpl2_p1, wpl2_p2, wpl3_p1, wpl3_p2, wpl4_p1, wpl4_p2, wpl5_p1, wpl5_p2, wpl6_p1, wpl6_p2, wpl7_p1, wpl7_p2, wpl8_p1, wpl8_p2, wpl9_p1, wpl9_p2, wpl10_p1, wpl10_p2, wpl11_p1, wpl11_p2, wpl12_p1, wpl12_p2, wpl13_p1, wpl13_p2, wpl14_p1, wpl14_p2, wpl15_p1, wpl15_p2)
+
+```
+
+
+7. Adding a column for dyad number and matching variable names with other df's
+```{r}
+pl <- pl %>%
+  mutate(Dyad.Number = ceiling(row_number() / 2))
+
+# function by default moves variable to the fist positition
+pl <- pl %>%
+  relocate(Dyad.Number)
+
+#match name with other df's
+pl <- pl %>%
+  rename(Participant.ID = participant)
+
+```
+
+
+8. Exporting new file
+```{r}
+
+# Save a data frame as an Excel file
+write.xlsx(pl, "C:/Users/korvi/OneDrive/Desktop/aicross/piratelog.xlsx")
+
+```
+
+
